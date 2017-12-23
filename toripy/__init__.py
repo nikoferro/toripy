@@ -14,14 +14,15 @@ from stem.util import term
 
 class Toripy(object):
     def __init__(self,
-                 proxy_port=9050,
+                 proxy_port=9150,
                  controller_port=9051,
                  password=None,
                  socks_port=7000,
                  socks_ip="127.0.0.1",
                  tor_config=None,
                  tor_cmd=None,
-                 verbose=False):
+                 verbose=False,
+                 use_default_proxy=False):
 
         self.proxy_port = proxy_port
         self.socks_port = socks_port
@@ -31,6 +32,7 @@ class Toripy(object):
         self.tor_config = tor_config
         self.tor_cmd = tor_cmd
         self.verbose = verbose
+        self.use_default_proxy = use_default_proxy
 
         self.tor_process = None
 
@@ -85,7 +87,8 @@ class Toripy(object):
                 tor_config=self.tor_config, tor_cmd=self.tor_cmd)
 
         self.__setup_tor_controller()
-        self.__setup_sockets_connection()
+        if not self.use_default_proxy:
+            self.__setup_sockets_connection()
 
     def __print_init_msg(self, line):
         if "Bootstrapped " in line:
