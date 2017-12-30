@@ -2,6 +2,12 @@
 
 Lightweight python interface to easily make HTTP(s) requests over the Tor network
 
+## Install
+
+```
+pip install toripy
+```
+
 ## Usage
 
 The 3 following code examples cover this 3 different scenarios
